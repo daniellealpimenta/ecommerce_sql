@@ -7,13 +7,17 @@ import java.util.InputMismatchException;
 
 public class Main {
 
+    //Atributo usado par manter o programa em execução
     static boolean ligado = true;
+    //Esse atributo armazena a opção escolhida pelo usuário
     static int opcao;
 
     public static void main(String[] args) {
         Scanner ler = new Scanner(System.in);
 
+        // Iniciando a classe de conexão com BD
         DB conection = new DB();
+        //Iniciando conexão com banco de dados a partir da função 'conectarDB()'
         Connection connection = conection.conectarDB();
         if (connection == null) {
             System.out.println("Falha ao conectar ao banco de dados. O programa será encerrado.");
