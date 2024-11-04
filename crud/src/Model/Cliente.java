@@ -3,12 +3,14 @@ package Model;
 import java.util.Date;
 
 public class Cliente {
+    //Atributos necessários para nossa classe cliente
     private int Cliente_ID;
     private String Nome;
     private String Email;
     private String Telefone;
     private Date Data_Cadastro;
 
+    //getters and setters
     public int getCliente_ID() {
         return Cliente_ID;
     }
