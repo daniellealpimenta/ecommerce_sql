@@ -76,9 +76,14 @@ public class CRUD {
 
 // ### FIM COMENTARIOS ANA JULIA ###
 
-    public void drop(int id) {
-        String colunaId;
 
+// ### COMENTÁRIOS FILIPI ###
+    
+    // Define um método drop que recebe parâmetro id 
+    public void drop(int id) {
+	//Declara o atributo colunaId do tipo String 
+        String colunaId;
+	// O  switch verifica o valor da variável tabela e define a variável colunaId com o nome da coluna correspondente
         switch (tabela) {
             case "Clientes":
                 colunaId = "Cliente_ID";
@@ -110,35 +115,46 @@ public class CRUD {
             case "Carrinho":
                 colunaId = "Carrinho_ID";
                 break;
+	    // Se não corresponder a nenhum dos casos, imprime “Tabela inválida!” e encerra o método.
             default:
                 System.out.println("Tabela inválida!");
                 return;
         }
-
-        String sql = "DELETE FROM " + tabela + " WHERE " + colunaId + " = ?";
+	//Cria uma variavel string sql que com o comando SQL para deletar um registro da tabela especificada 
+	String sql = "DELETE FROM " + tabela + " WHERE " + colunaId + " = ?";
+	//Tenta fazer uma conexão com o banco de dados 
         try (Connection conn = new DB().conectarDB();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-
+	    // Define o valor do id
             stmt.setInt(1, id);
+	    // Executa a ação delete no banco de dados
             stmt.executeUpdate();
+	    // Imprime se a ação for bem-sucedida.
             System.out.println("Registro foi removido com sucesso!");
+	  // Imprime um StackTrace caso haja alguma SQLException 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void select() {
-        String sql = "SELECT * FROM " + getTabela();
 
+    //// Define o método void select que nao recebe parâmetro
+    public void select() {
+	//Cria uma variavel string sql que com o comando SQL para selecionar os registros da tabela especificada 
+        String sql = "SELECT * FROM " + getTabela();
+	
+	//Tenta fazer uma conexão com o banco de dados 
         try (Connection conn = new DB().conectarDB()) {
+	    // Se for null, imprime uma mensagem de erro e encerra o método
             if (conn == null) {
                 System.out.println("Conexão não estabelecida. Verifique a configuração do banco de dados.");
                 return;
             }
 
             try (PreparedStatement stmt = conn.prepareStatement(sql);
+		 // Executa a consulta SQL e armazena o resultado em um ResultSet
                  ResultSet rs = stmt.executeQuery()) {
-
+		// Itera sobre os resultados da consulta (rs.next()) de acordo com valor da tabela, imprime os dados daquela tabela.
                 while (rs.next()) {
                     switch (tabela) {
                         case "Clientes":
@@ -177,9 +193,12 @@ public class CRUD {
                     }
                 }
             }
+	  // Imprime um StackTrace caso haja alguma SQLException
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 }
+	
 
+// ### COMENTÁRIOS FILIPI ###
