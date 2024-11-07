@@ -24,9 +24,12 @@ public class Main {
             return; // Encerra o programa se não houver conexão
         }
 
+        // objeto criado para ter acesso as funções da classe CRUD
         CRUD crud = new CRUD();
 
+        // loop para continuar rodando um menu enquanto a variável estiver como true
         while (ligado) {
+            // menu que permite o usuário escolher entre as funções básicas do CRUD
             System.out.println("""
                     ------ MENU DE OPÇÕES ------
                     1 - ADICIONAR
@@ -42,7 +45,7 @@ public class Main {
 
                 switch (opcao) {
                     case 1:
-                        // Adicionar registro
+                        // Após escolher a opção ADICIONAR/ INSERT, você pode escolehr entre as tabelas disponíveis.
                         System.out.println("""
                                 ------ ADICIONAR ------
                                 QUAL TABELA VOCÊ GOSTARIA DE ADICIONAR INFORMAÇÕES?
@@ -60,6 +63,7 @@ public class Main {
                         opcao = ler.nextInt();
                         ler.nextLine();
 
+                        // array do tipo String para armazenar as variáveis/atributos de cada tabela do BD, isso será utilizado na Classe CRUD, como uma variável para realizar as ações
                         String[] colunas = null;
                         String[] valores;
 
@@ -109,20 +113,22 @@ public class Main {
                                 continue;
                         }
 
+                        //Aqui cria-se uma variável valores, que vai ser preenchida com as respostas do usuário, e nada mais é do que o VALUES, para popular o DB, e tem uma pequena prevenção de erro, para que o usuário saiba como colocar o tipo DATE.
                         valores = new String[colunas.length];
                         for (int i = 0; i < colunas.length; i++) {
                             if (i == colunas.length - 1){
-                                System.out.println("Escreva a data nesse estilo: yyyy-mm-dd, se n da erro, animal");
+                                System.out.println("Escreva a data nesse estilo: yyyy-mm-dd");
                             }
                             System.out.printf("Digite o valor para %s: ", colunas[i]);
                             valores[i] = ler.nextLine();
 
                         }
+                        //chama um dos métodos da Classe Crud, o método em questão foi o selecionado pelo o usuário, INSERT.
                         crud.insert(colunas, valores);
                         break;
 
                     case 2:
-                        // Remover registro
+                        // Aqui segue a mesma lógica, no entanto, para outro comando do crud, o DELETE/DROP
                         System.out.println("Qual tabela você gostaria de remover informações?\n");
                         System.out.println("""
                                 ------ REMOVER ------
@@ -183,7 +189,7 @@ public class Main {
                         break;
 
                     case 3:
-                        // Editar registro
+                        // Essse também segue a mesma lógica, mas para o comando UPDATE.
                         System.out.println("Qual tabela você gostaria de editar informações?\n");
                         System.out.println("""
                                 ------ EDITAR ------
@@ -247,7 +253,7 @@ public class Main {
                         break;
 
                     case 4:
-                        // Selecionar registro
+                        // E essa, para o comando SELECT
                         System.out.println("Qual tabela você gostaria de selecionar as informações?\n");
                         System.out.println("""
                                 ------ SELECIONAR ------
@@ -306,20 +312,23 @@ public class Main {
                         break;
 
                     case 5:
+                        // Já esse caso, foi criado para dar a opção de sair do menu para o usuário, e torna falso a variável que mantém o loop ligado.
                         System.out.println("Saindo do sistema...");
                         ligado = false;
                         break;
 
                     default:
+                        // foi criado para a prevenção de erro, evitando que o usuário coloque uma tecla fora das opções.
                         System.out.println("Opção inválida!");
                         break;
-                }
+                } // foi feito um TRY / CATCH, para prevenir e tratar o erro de entrada errada.
             } catch (InputMismatchException e) {
                 System.out.println("Entrada inválida! Por favor, insira um número.");
                 ler.nextLine(); // Limpar o buffer
             }
         }
 
+        // fecha-se o Scanner. 
         ler.close();
     }
 }
