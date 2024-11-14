@@ -4,6 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Classe responsável por realizar a conexão com o Banco de Dados.
+ *
+ * @author erickTavaresNunes
+ */
+
 public class DB {
 
     //Declarando os atributos que serão usados para conexão com o banco de dados, url, usuario e senha do banco
@@ -11,7 +17,11 @@ public class DB {
     private final String usuario = "root";
     private final String senha = "catolica";
 
-    //Função para conexão com banco de dados
+    /**
+     * Função para conexão com banco de dados
+     *
+     * @return a função retorna a conexão com o banco de dados, caso tenha dado erro, retorna NULL.
+     */
     public Connection conectarDB() {
         Connection connection = null;
 
@@ -32,7 +42,11 @@ public class DB {
         return connection; // Retorna null se houver erro na conexão
     }
 
-    //Função para encerrar conexão com BD
+    /**
+     * Função para encerrar conexão com Banco de Dados
+     *
+     * @param connection é um objeto da classe Connection, é utilizado para encerrar a conexão previamente estabelecida.
+     */
     public void fecharConexao(Connection connection) {
         if (connection != null) {
             try {

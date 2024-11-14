@@ -1,4 +1,3 @@
-// ### INÍCIO COMENTARIOS ANA JULIA ###
 
 // Pacote onde essa classe está
 package CRUD;
@@ -10,18 +9,41 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Esta é a classe que é responsável por ter os principais métodos do estilo CRUD, isso é "CREATE, READ, UPDATE, DELETE"
+ *
+ * @author filipiRomão, anaJúliaBorges
+ */
 public class CRUD {
     // Declarando atributo privado do tipo String
     private String tabela;
     // Metodo get do atributo(é o metodo que pega o valor salvo no atributo)
+
+    /**
+     * função get, para acessar a variável tabela.
+     *
+     * @return retorna a variável tabela.
+     */
+
     public String getTabela() {
         return tabela;
     }
-    // Metodo set do atributo(é o metodo que atribui valor no atributo)
+
+    /**
+     * Função set, atribui valor para a variável tabela.
+     *
+     * @param tabela
+     */
     public void setTabela(String tabela) {
         this.tabela = tabela;
     }
-    // Método de insert que recebe dois arrays de strings como parametro o colunas (tem nomes das colunas) e valores (tem os valores a serem inseridos)
+
+    /**
+     * Metodo de insert que recebe dois arrays de strings como parametro o colunas (tem nomes das colunas) e valores (tem os valores a serem inseridos)
+     *
+     * @param colunas é um objeto do tipo Array de Strings, que vai ser percorrido e incrementado com os valores.
+     * @param valores é um objeto do tipo Array de Strings, vai incrementar o array de colunas.
+     */
     public void insert(String[] colunas, String[] valores) {
         //  Inicializa um objeto StringBuilder como o nome placeholders 
         StringBuilder placeholders = new StringBuilder();
@@ -54,7 +76,14 @@ public class CRUD {
         }
     }
 
-    // Método de updateque recebe três strings como parametro o atributo (nome da coluna que vai ser atualizada), o valorAntigo (valor atual do atributo) e valorNovo (novo valor do atributo)
+    /**
+     *
+     * Metodo de updateque recebe três strings como parametro o atributo (nome da coluna que vai ser atualizada), o valorAntigo (valor atual do atributo) e valorNovo (novo valor do atributo)
+     *
+     * @param atributo tipo String, ele é usado para substituir o valor de qual atributo da tabela vai ser alterado.
+     * @param valorAntigo tipo String, ele é usado para dizer qual era o antigo valor a ser alterado.
+     * @param valorNovo tipo String, é usado para dizer qual será o novo valor para alterar.
+     */
     public void update(String atributo, String valorAntigo, String valorNovo) {
 	// Cria uma a query de update, para atualizar o valor do atributo especificado
         String sql = "UPDATE " + tabela + " SET " + atributo + " = ? WHERE " + atributo + " = ?";
@@ -78,8 +107,11 @@ public class CRUD {
 
 
 // ### COMENTÁRIOS FILIPI ###
-    
-    // Define um método drop que recebe parâmetro id 
+
+    /**
+     * Define um metodo drop que recebe parâmetro id
+     * @param id do tipo int, é usado para indentificar as colunas e para conseguir exclui-las da forma correta.
+     */
     public void drop(int id) {
 	//Declara o atributo colunaId do tipo String 
         String colunaId;
@@ -115,7 +147,7 @@ public class CRUD {
             case "Carrinho":
                 colunaId = "Carrinho_ID";
                 break;
-	    // Se não corresponder a nenhum dos casos, imprime “Tabela inválida!” e encerra o método.
+	    // Se não corresponder a nenhum dos casos, imprime “Tabela inválida!” e encerra o metodo.
             default:
                 System.out.println("Tabela inválida!");
                 return;
@@ -137,15 +169,16 @@ public class CRUD {
         }
     }
 
-
-    //// Define o método void select que nao recebe parâmetro
+    /**
+     * Define o metodo void select, que é utilizado para selecionar todas as informações (*), de uma tabela que vai ser passada, e que nao recebe parâmetro.
+     */
     public void select() {
 	//Cria uma variavel string sql que com o comando SQL para selecionar os registros da tabela especificada 
         String sql = "SELECT * FROM " + getTabela();
 	
 	//Tenta fazer uma conexão com o banco de dados 
         try (Connection conn = new DB().conectarDB()) {
-	    // Se for null, imprime uma mensagem de erro e encerra o método
+	    // Se for null, imprime uma mensagem de erro e encerra o metodo
             if (conn == null) {
                 System.out.println("Conexão não estabelecida. Verifique a configuração do banco de dados.");
                 return;

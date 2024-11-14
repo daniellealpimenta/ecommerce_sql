@@ -5,6 +5,12 @@ import java.util.Scanner;
 import java.sql.Connection;
 import java.util.InputMismatchException;
 
+/**
+ * Classe feita para abrigar as demais chamadas de classes e funções, além de hospedar o menu do prompt.
+ *
+ * @author danielLealPimenta
+ */
+
 public class Main {
 
     //Atributo usado par manter o programa em execução
@@ -12,9 +18,14 @@ public class Main {
     //Esse atributo armazena a opção escolhida pelo usuário
     static int opcao;
 
+    /**
+     * A Função Main é a responsável por abrigar os objetos das demais classes e chamar suas respectivas funções compilando tudo.
+     *
+     * @param args
+     */
+
     public static void main(String[] args) {
         Scanner ler = new Scanner(System.in);
-
         // Iniciando a classe de conexão com BD
         DB conection = new DB();
         //Iniciando conexão com banco de dados a partir da função 'conectarDB()'
@@ -123,7 +134,7 @@ public class Main {
                             valores[i] = ler.nextLine();
 
                         }
-                        //chama um dos métodos da Classe Crud, o método em questão foi o selecionado pelo o usuário, INSERT.
+                        //chama um dos métodos da Classe Crud, o metodo em questão foi o selecionado pelo o usuário, INSERT.
                         crud.insert(colunas, valores);
                         break;
 

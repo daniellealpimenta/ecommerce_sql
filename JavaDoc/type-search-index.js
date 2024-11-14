@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"Model","l":"Cliente"},{"p":"CRUD","l":"CRUD"},{"p":"CONEXAODB","l":"DB"},{"p":"<Unnamed>","l":"Main"}];updateSearchResults();
